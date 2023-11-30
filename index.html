@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seaton's Blog</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            text-align: center;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Seaton's Blog</h1>
+    </header>
+
+    <main id="content">
+        <!-- Content will be loaded dynamically here -->
+    </main>
+
+    <script>
+        // Function to load and display Markdown content
+        function loadMarkdownFile(file) {
+            fetch(file)
+                .then(response => response.text())
+                .then(text => {
+                    // Convert Markdown to HTML
+                    const converter = new showdown.Converter();
+                    const html = converter.makeHtml(text);
+
+                    // Display HTML in the content area
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading Markdown:', error));
+        }
+
+        // Example: Load an initial Markdown file
+        loadMarkdownFile('README.md');
+    </script>
+
+    <!-- Include the Showdown library for converting Markdown to HTML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+
+</body>
+</html>
